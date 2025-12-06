@@ -186,6 +186,7 @@ All available options:
     backup_count = 1,
     compression = true,
     encryption = false,
+    readable = false,  -- Formatted JSON for readability and easy diffing.
   },
     theme = {
     border = "rounded",

@@ -365,8 +365,11 @@ function Storage.save_immediate(tasks, force_mode)
   -- Write to file directly with atomic file write pattern (while preserving symlinks)
   local real_storage_path = vim.fn.resolve(storage_path)
   local temp_file = real_storage_path .. ".tmp"
+  local lines = config.storage.readable
+    and Utils.json_pretty_print(json_data)
+    or { json_data }
   local write_ok, write_err = pcall(function()
-    return vim.fn.writefile({ json_data }, temp_file)
+    return vim.fn.writefile(lines, temp_file)
   end)
 
   if not write_ok or write_err ~= 0 then
